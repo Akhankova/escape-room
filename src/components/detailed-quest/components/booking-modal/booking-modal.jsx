@@ -4,7 +4,6 @@ import React, { useState, useEffect} from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { URL_ORDERS } from '../../../../const';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const BookingModal = ({ isVisible = false, onClose }) => {
@@ -89,7 +88,6 @@ const validTel = !telValid ? <S.BlockValid >Phone length must be 10 characters l
   return !isVisible ? null : (
     <S.BlockLayer>
     <S.Modal>
-      <ToastContainer/>
       <S.ModalCloseBtn onClick={handleExitClick}>
         <IconClose width="16" height="16" />
         <S.ModalCloseLabel>Закрыть окно</S.ModalCloseLabel>
