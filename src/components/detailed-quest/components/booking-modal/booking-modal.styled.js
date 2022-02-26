@@ -13,6 +13,10 @@ const BlockLayer = styled.div`
   background-color: ${({ theme }) => theme.color.eclipse};
 `;
 
+const BlockValid = styled.div`
+color: red;
+`;
+
 const Modal = styled.section`
   position: absolute;
   top: 50%;
@@ -226,4 +230,5 @@ export {
   BookingCheckboxInput,
   BookingCheckboxText,
   BookingLegalLink,
+  BlockValid,
 };

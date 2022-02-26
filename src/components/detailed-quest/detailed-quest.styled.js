@@ -9,14 +9,14 @@ const Main = styled.main`
 `;
 
 const PageImage = styled.img`
-  z-index: 1;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+z-index: 1;
+position: absolute;
+top: 0;
+left: 0;
 
-  object-fit: cover;
+width: 100%;
+height: 100%;
+
 `;
 
 const PageContentWrapper = styled.div`

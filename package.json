@@ -1,14 +1,23 @@
 {
   "private": true,
   "dependencies": {
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "@reduxjs/toolkit": "^1.7.2",
+    "axios": "^0.26.0",
+    "google-map-react": "^2.1.10",
+    "leaflet": "^1.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-leaflet": "^3.2.5",
+    "react-redux": "^7.2.6",
     "react-router-dom": "5.3.0",
     "react-scripts": "4.0.3",
+    "react-toastify": "^8.2.0",
+    "redux": "^4.1.2",
     "styled-components": "5.3.3"
   },
   "devDependencies": {
     "concurrently": "6.3.0",
+    "eslint": "7.32.0",
     "joi": "17.4.2",
     "json-server": "0.17.0",
     "sass": "1.43.4"
@@ -17,8 +26,7 @@
     "start:client": "react-scripts start",
     "start:server": "node server/server",
     "start": "concurrently -k -p \"{name}\" -n \"CLIENT,SERVER\" -c \"green,blue\" \"npm:start:client\" \"npm:start:server\"",
-    "build": "react-scripts build",
-    "eslint": "eslint --ext .jsx --ext .js src/"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [

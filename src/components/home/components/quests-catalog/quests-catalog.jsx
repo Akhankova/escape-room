@@ -7,224 +7,108 @@ import { ReactComponent as IconScifi } from 'assets/img/icon-scifi.svg';
 import { ReactComponent as IconPerson } from 'assets/img/icon-person.svg';
 import { ReactComponent as IconPuzzle } from 'assets/img/icon-puzzle.svg';
 import * as S from './quests-catalog.styled';
+import {useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
+import { setGenre } from '../../../../store/actions';
+import { getFilterGames, getGenre } from '../../../../store/cards-data/selectors';
+import { generatePath } from 'react-router-dom';
+import { GenresEnglish, levels} from '../../../../const';
 
-const QuestsCatalog = (props) => {
-  const {genre, onClick} = props;
+const QuestsCatalog = () => {
+  const dispatchAction = useDispatch();
+  const genreNew = (newGenre) => {
+    dispatchAction(setGenre(newGenre));
+  };
+
+  const cards = useSelector(getFilterGames);
+  const genre = useSelector(getGenre);
+
+  const getLevel = (gameLevel) => {
+    let levelGame;
+    levels.forEach((element) => {
+      if (element.key === gameLevel) {
+        levelGame = element.value;
+      }
+    });
+    return levelGame
+  };
 
   return (
     <>
     <S.Tabs>
-      <S.TabItem>
-        <S.TabBtn isActive>
+      <S.TabItem onClick={(evt) => genreNew(evt.target.textContent)}>
+        <S.TabBtn isActive={genre === 'Все квесты' ? true : false}>
           <IconAllQuests />
           <S.TabTitle>Все квесты</S.TabTitle>
         </S.TabBtn>
       </S.TabItem>
 
-      <S.TabItem>
+      <S.TabItem onClick={() => genreNew(GenresEnglish.ADVENTURES)}>
         <S.TabBtn>
           <IconAdventures />
-          <S.TabTitle>Приключения</S.TabTitle>
+          <S.TabTitle >Приключения</S.TabTitle>
         </S.TabBtn>
       </S.TabItem>
 
-      <S.TabItem>
+      <S.TabItem onClick={() => genreNew(GenresEnglish.HORROR)}>
         <S.TabBtn>
           <IconHorrors />
           <S.TabTitle>Ужасы</S.TabTitle>
         </S.TabBtn>
       </S.TabItem>
 
-      <S.TabItem>
+      <S.TabItem onClick={() => genreNew(GenresEnglish.MYSTIC)}>
         <S.TabBtn>
           <IconMystic />
           <S.TabTitle>Мистика</S.TabTitle>
         </S.TabBtn>
       </S.TabItem>
 
-      <S.TabItem>
+      <S.TabItem onClick={() => genreNew(GenresEnglish.DETECTIVE)}>
         <S.TabBtn>
           <IconDetective />
           <S.TabTitle>Детектив</S.TabTitle>
         </S.TabBtn>
       </S.TabItem>
 
-      <S.TabItem>
+      <S.TabItem onClick={(evt) => genreNew(evt.target.textContent)}>
         <S.TabBtn>
           <IconScifi />
-          <S.TabTitle>Sci-fi</S.TabTitle>
+          <S.TabTitle>sci-fi</S.TabTitle>
         </S.TabBtn>
       </S.TabItem>
     </S.Tabs>
 
     <S.QuestsList>
-      <S.QuestItem>
-        <S.QuestItemLink to="/quest">
-          <S.Quest>
-            <S.QuestImage
-              src="img/preview-sklep.jpg"
-              width="344"
-              height="232"
-              alt="квест Склеп"
-            />
+    { cards.map((card) => (
+      <S.QuestItem  key={card.id}>
+      <S.QuestItemLink to={generatePath("/detailed-quest/:id" , {id: card.id})}>
+        <S.Quest>
+          <S.QuestImage
+            src={card.previewImg}
+            width="344"
+            height="232"
+            alt={card.title}
+          />
 
-            <S.QuestContent>
-              <S.QuestTitle>Склеп</S.QuestTitle>
+          <S.QuestContent>
+            <S.QuestTitle>{card.title}</S.QuestTitle>
 
-              <S.QuestFeatures>
-                <S.QuestFeatureItem>
-                  <IconPerson />
-                  2–5 чел
-                </S.QuestFeatureItem>
-                <S.QuestFeatureItem>
-                  <IconPuzzle />
-                  сложный
-                </S.QuestFeatureItem>
-              </S.QuestFeatures>
-            </S.QuestContent>
-          </S.Quest>
-        </S.QuestItemLink>
-      </S.QuestItem>
-
-      <S.QuestItem>
-        <S.QuestItemLink to="/quest">
-          <S.Quest>
-            <S.QuestImage
-              src="img/preview-maniac.jpg"
-              width="344"
-              height="232"
-              alt="квест Маньяк"
-            />
-
-            <S.QuestContent>
-              <S.QuestTitle>Маньяк</S.QuestTitle>
-
-              <S.QuestFeatures>
-                <S.QuestFeatureItem>
-                  <IconPerson />
-                  3–6 чел
-                </S.QuestFeatureItem>
-                <S.QuestFeatureItem>
-                  <IconPuzzle />
-                  средний
-                </S.QuestFeatureItem>
-              </S.QuestFeatures>
-            </S.QuestContent>
-          </S.Quest>
-        </S.QuestItemLink>
-      </S.QuestItem>
-
-      <S.QuestItem>
-        <S.QuestItemLink to="/quest">
-          <S.Quest>
-            <S.QuestImage
-              src="img/preview-ritual.jpg"
-              width="344"
-              height="232"
-              alt="квест Ритуал"
-            />
-
-            <S.QuestContent>
-              <S.QuestTitle>Ритуал</S.QuestTitle>
-
-              <S.QuestFeatures>
-                <S.QuestFeatureItem>
-                  <IconPerson />
-                  3–5 чел
-                </S.QuestFeatureItem>
-                <S.QuestFeatureItem>
-                  <IconPuzzle />
-                  легкий
-                </S.QuestFeatureItem>
-              </S.QuestFeatures>
-            </S.QuestContent>
-          </S.Quest>
-        </S.QuestItemLink>
-      </S.QuestItem>
-
-      <S.QuestItem>
-        <S.QuestItemLink to="/quest">
-          <S.Quest>
-            <S.QuestImage
-              src="img/preview-old-ceil.jpg"
-              width="344"
-              height="232"
-              alt="квест История призраков"
-            />
-
-            <S.QuestContent>
-              <S.QuestTitle>История призраков</S.QuestTitle>
-
-              <S.QuestFeatures>
-                <S.QuestFeatureItem>
-                  <IconPerson />
-                  5–6 чел
-                </S.QuestFeatureItem>
-                <S.QuestFeatureItem>
-                  <IconPuzzle />
-                  легкий
-                </S.QuestFeatureItem>
-              </S.QuestFeatures>
-            </S.QuestContent>
-          </S.Quest>
-        </S.QuestItemLink>
-      </S.QuestItem>
-
-      <S.QuestItem>
-        <S.QuestItemLink to="/quest">
-          <S.Quest>
-            <S.QuestImage
-              src="img/preview-final-frontier.jpg"
-              width="344"
-              height="232"
-              alt="квест Тайны старого особняка"
-            />
-
-            <S.QuestContent>
-              <S.QuestTitle>Тайны старого особняка</S.QuestTitle>
-
-              <S.QuestFeatures>
-                <S.QuestFeatureItem>
-                  <IconPerson />
-                  2–3 чел
-                </S.QuestFeatureItem>
-                <S.QuestFeatureItem>
-                  <IconPuzzle />
-                  легкий
-                </S.QuestFeatureItem>
-              </S.QuestFeatures>
-            </S.QuestContent>
-          </S.Quest>
-        </S.QuestItemLink>
-      </S.QuestItem>
-
-      <S.QuestItem>
-        <S.QuestItemLink to="/quest">
-          <S.Quest>
-            <S.QuestImage
-              src="img/preview-house-in-the-woods.jpg"
-              width="344"
-              height="232"
-              alt="квест Хижина в лесу"
-            />
-
-            <S.QuestContent>
-              <S.QuestTitle>Хижина в лесу</S.QuestTitle>
-
-              <S.QuestFeatures>
-                <S.QuestFeatureItem>
-                  <IconPerson />
-                  4–7 чел
-                </S.QuestFeatureItem>
-                <S.QuestFeatureItem>
-                  <IconPuzzle />
-                  средний
-                </S.QuestFeatureItem>
-              </S.QuestFeatures>
-            </S.QuestContent>
-          </S.Quest>
-        </S.QuestItemLink>
-      </S.QuestItem>
+            <S.QuestFeatures>
+              <S.QuestFeatureItem>
+                <IconPerson />
+                {card.peopleCount.join('-')} чел
+              </S.QuestFeatureItem>
+              <S.QuestFeatureItem>
+                <IconPuzzle />
+                {getLevel(card.level)}
+              </S.QuestFeatureItem>
+            </S.QuestFeatures>
+          </S.QuestContent>
+        </S.Quest>
+      </S.QuestItemLink>
+    </S.QuestItem>
+              ))}
     </S.QuestsList>
   </>
   )

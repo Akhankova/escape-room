@@ -80,7 +80,6 @@ const Link = styled(RouterLink)`
     css`
       color: ${({ theme }) => theme.color.tangerine};
     `}
-
   &:focus,
   &:hover {
     color: ${({ theme }) => theme.color.tangerine};

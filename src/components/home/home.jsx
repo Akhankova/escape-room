@@ -7,8 +7,10 @@ import {
 import { QuestsCatalog } from './components/components';
 import * as S from './home.styled';
 
-const HomePage = () => (
-  <MainLayout>
+const HomePage = () => {
+
+  return (
+    <MainLayout>
     <S.Main forwardedAs="main">
       <PageHeading>
         <PageTitle>Выберите тематику</PageTitle>
@@ -17,6 +19,7 @@ const HomePage = () => (
       <QuestsCatalog />
     </S.Main>
   </MainLayout>
-);
+  )
+};
 
 export default HomePage;

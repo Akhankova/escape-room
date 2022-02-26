@@ -36,6 +36,11 @@ const Contacts = styled.div`
   display: flex;
 `;
 
+const Map = styled.div`
+width: 640px;
+height: 480px;
+`;
+
 const ContactsList = styled.dl`
   width: 233px;
   margin: 0;
@@ -43,6 +48,11 @@ const ContactsList = styled.dl`
   padding: 0;
   padding-top: 14px;
 `;
+
+const AnyReactComponent = styled.div`
+position: absolute;
+`;
+
 
 const ContactTitle = styled.dt`
   margin-bottom: 5px;
@@ -99,4 +109,6 @@ export {
   ContactLink,
   ContactsMap,
   ContactsMapImage,
+  AnyReactComponent,
+  Map,
 };
