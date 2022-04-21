@@ -9,3 +9,12 @@ export const loadGames = () =>
       console.log('error');
     }
   };
+  export const loadGamesFiltred = () =>
+  async (dispatch, _getState, api) => {
+    try {
+      const {data} = await api.get('/quests');
+      dispatch(setGames(data));
+    } catch {
+      console.log('error');
+    }
+  };
